@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "300f1c69-0161-442c-bb2c-d6b67d8e71c6",
+		"name": "productionTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26210073",
+		"_collection_link": "https://warped-comet-583730.postman.co/workspace/Team-Workspace~57e48ebf-ce23-4b1e-8bf6-fae8238766fa/collection/26210073-300f1c69-0161-442c-bb2c-d6b67d8e71c6?action=share&source=collection_link&creator=26210073"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "create user 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Статус-код 400 при некорректных данных\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Проверка сообщения об ошибке\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"message\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"\",\r\n  \"full_name\": \"Иван Иванов\",\r\n  \"password\": \"securePa$$\",\r\n  \"role\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{production_url}}/admin/users",
+							"host": [
+								"{{production_url}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create user 201",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"UUID is present and saved\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"uuid\");\r",
+									"    pm.environment.set(\"user_uuid\", json.uuid);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Тест 2: Проверка наличия полей в ответе\r",
+									"pm.test(\"Проверка структуры ответа\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response).to.have.property(\"created_at\");\r",
+									"    pm.expect(response).to.have.property(\"email\");\r",
+									"    pm.expect(response).to.have.property(\"full_name\");\r",
+									"    pm.expect(response).to.have.property(\"last_login\");\r",
+									"    pm.expect(response).to.have.property(\"role\");\r",
+									"    pm.expect(response).to.have.property(\"updated_at\");\r",
+									"    pm.expect(response).to.have.property(\"uuid\");\r",
+									"});\r",
+									"\r",
+									"// Тест 3: Проверка значений полей\r",
+									"pm.test(\"Проверка значений полей\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response.email).to.equal(\"ivan@example.com\");\r",
+									"    pm.expect(response.full_name).to.equal(\"Иван Иванов\");\r",
+									"    pm.expect(response.role).to.equal(\"user\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{admin_access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"ivan@example.com\",\r\n  \"full_name\": \"Иван Иванов\",\r\n  \"password\": \"securePa$$\",\r\n  \"role\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{production_url}}/admin/users",
+							"host": [
+								"{{production_url}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has all required fields\", function () {\r",
+									"    const json = pm.response.json();\r",
+									"    pm.expect(json).to.have.property(\"uuid\");\r",
+									"    pm.expect(json).to.have.property(\"email\");\r",
+									"    pm.expect(json).to.have.property(\"full_name\");\r",
+									"    pm.expect(json).to.have.property(\"role\");\r",
+									"    pm.expect(json).to.have.property(\"created_at\");\r",
+									"    pm.expect(json).to.have.property(\"updated_at\");\r",
+									"    pm.expect(json).to.have.property(\"last_login\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"UUID is valid\", function () {\r",
+									"    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;\r",
+									"    pm.expect(pm.response.json().uuid).to.match(uuidRegex);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{production_url}}/admin/users/{{user_uuid}}",
+							"host": [
+								"{{production_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"{{user_uuid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{production_url}}/admin/users/invalid-uuid",
+							"host": [
+								"{{production_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"invalid-uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{production_url}}/admin/users/{{user_uuid}}",
+							"host": [
+								"{{production_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"{{user_uuid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404 after deletion\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{production_url}}/admin/users/{{user_uuid}}",
+							"host": [
+								"{{production_url}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"{{user_uuid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

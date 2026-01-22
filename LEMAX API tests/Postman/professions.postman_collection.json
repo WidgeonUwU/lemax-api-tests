@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "ff5d8d6e-c021-43a2-9636-7e5d97f489a4",
+		"name": "professions",
+		"description": "Проверяем работу с профессиями",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26210073",
+		"_collection_link": "https://warped-comet-583730.postman.co/workspace/Team-Workspace~57e48ebf-ce23-4b1e-8bf6-fae8238766fa/collection/31781017-ff5d8d6e-c021-43a2-9636-7e5d97f489a4?action=share&source=collection_link&creator=26210073"
+	},
+	"item": [
+		{
+			"name": "create profession",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"Описание профессии\",\r\n  \"name\": \"Специалист по сварке\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/professions",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"professions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update profession",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"NOVOE Описание профессии\",\r\n  \"name\": \"Сварщик\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/professions/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"professions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get profession",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/hr/professions/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"professions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all professions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/hr/professions/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"professions",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete profession",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/hr/professions/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"professions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

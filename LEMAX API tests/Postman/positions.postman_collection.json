@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "bfbe5dae-45b7-4dca-b36e-bf5c744f72d6",
+		"name": "positions",
+		"description": "Проверяем работу с должностями для карьерного пути",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26210073",
+		"_collection_link": "https://warped-comet-583730.postman.co/workspace/Team-Workspace~57e48ebf-ce23-4b1e-8bf6-fae8238766fa/collection/31781017-bfbe5dae-45b7-4dca-b36e-bf5c744f72d6?action=share&source=collection_link&creator=26210073"
+	},
+	"item": [
+		{
+			"name": "create position",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"attestation_required\": true,\r\n  \"description\": \"Описываю дожность такую-то\",\r\n  \"min_experience\": 24,\r\n  \"min_meeting_count\": 10,\r\n  \"name\": \"Сварщик 5-го разряда\",\r\n  \"profession_ids\": [\r\n    1\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/positions",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"positions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get position",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/employee/positions/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employee",
+						"positions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get career path",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/employee/career?profession_id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employee",
+						"career"
+					],
+					"query": [
+						{
+							"key": "profession_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create next position",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    4\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/positions/3/next",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"positions",
+						"3",
+						"next"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete position",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/hr/positions/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"positions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all positions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/hr/positions/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"positions",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update position",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"attestation_required\": true,\r\n  \"description\": \"НОВОЕ Описание должности\",\r\n  \"min_experience\": 11111,\r\n  \"name\": \"Сварщик ПАРАМ ПАМ ПАМ\",\r\n  \"profession_ids\": [\r\n    1\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/positions/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"positions",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

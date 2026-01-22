@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "1eebaef2-2ec6-427e-9273-fa866b6e07ef",
+		"name": "meetings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26210073",
+		"_collection_link": "https://warped-comet-583730.postman.co/workspace/Team-Workspace~57e48ebf-ce23-4b1e-8bf6-fae8238766fa/collection/31781017-1eebaef2-2ec6-427e-9273-fa866b6e07ef?action=share&source=collection_link&creator=26210073"
+	},
+	"item": [
+		{
+			"name": "create meet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"meeting_date\": \"2025-02-07T15:04:05Z\",\r\n  \"meeting_type\": \"individual\",\r\n  \"notes\": \"Повышение квалификации сотрудника номер 1 по сварке\",\r\n  \"title\": \"Повышение квалификации\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/meetings",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"meetings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get meet",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"meeting_date\": \"2025-02-07T15:04:05Z\",\r\n  \"meeting_type\": \"individual\",\r\n  \"notes\": \"Повышение квалификации сотрудника номер 1 по сварке\",\r\n  \"title\": \"Повышение квалификации\"\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/meetings/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"meetings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update meet",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"meeting_date\": \"2025-02-07T15:04:05Z\",\r\n  \"meeting_type\": \"individual\",\r\n  \"notes\": \"Повышение квалификации сотрудника номер 1 по сварке\",\r\n  \"title\": \"Повышение квалификации (апдейт)\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/meetings/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"meetings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete meet",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/hr/meetings/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"meetings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get employee meet",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{employee_access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"meeting_date\": \"2025-02-07T15:04:05Z\",\r\n  \"meeting_type\": \"individual\",\r\n  \"notes\": \"Повышение квалификации сотрудника номер 1 по сварке\",\r\n  \"title\": \"Повышение квалификации\"\r\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/employee/meetings",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"employee",
+						"meetings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all meetings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/hr/meetings/all",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"hr",
+						"meetings",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
